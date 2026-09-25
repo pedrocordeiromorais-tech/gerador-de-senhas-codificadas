@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gere, codifique e descodifique senhas com um passo a passo visual." />
+  <title>Codexa — Gerador de senhas codificadas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Codexa início">
+      <span class="brand-mark">C<span>x</span></span>
+      <span>CODEXA</span>
+    </a>
+    <div class="topbar-note"><span class="live-dot"></span> ferramenta local · seus dados ficam aqui</div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="eyebrow"><span class="eyebrow-line"></span> segurança que você consegue entender</div>
+      <h1>Suas palavras.<br /><em>Novos símbolos.</em></h1>
+      <p class="hero-copy">Transforme qualquer senha em uma sequência codificada e acompanhe cada etapa do processo — da origem à decodificação.</p>
+      <div class="hero-stats">
+        <div><strong>01</strong><span>digite ou gere</span></div>
+        <div><strong>02</strong><span>codifique</span></div>
+        <div><strong>03</strong><span>entenda tudo</span></div>
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="Gerador de senhas codificadas">
+      <div class="panel input-panel">
+        <div class="panel-heading">
+          <div><span class="step-number">01</span><h2>Sua senha</h2></div>
+          <span class="status-pill"><span class="status-dot"></span> pronto</span>
+        </div>
+        <label for="passwordInput">Digite uma senha para começar</label>
+        <div class="input-wrap">
+          <input id="passwordInput" type="password" value="Aurora#2026" autocomplete="off" spellcheck="false" placeholder="Ex.: minha-senha-123" />
+          <button class="icon-button" id="togglePassword" type="button" aria-label="Mostrar senha">◉</button>
+        </div>
+        <div class="input-actions">
+          <button class="button button-primary" id="generateButton" type="button"><span>✦</span> gerar senha forte</button>
+          <button class="button button-ghost" id="clearButton" type="button">limpar</button>
+        </div>
+        <div class="strength" aria-live="polite"><span>força estimada</span><div class="strength-bars"><i></i><i></i><i></i><i></i></div><b id="strengthLabel">boa</b></div>
+        <div class="tip"><span>✦</span><p>Use uma frase longa e única. Esta demonstração codifica o conteúdo, mas <strong>não substitui</strong> um gerenciador de senhas.</p></div>
+      </div>
+
+      <div class="connector" aria-hidden="true"><span>→</span></div>
+
+      <div class="panel output-panel">
+        <div class="panel-heading">
+          <div><span class="step-number">02</span><h2>Resultado codificado</h2></div>
+          <span class="format-tag">UTF-8 · BASE 64</span>
+        </div>
+        <label for="encodedOutput">Sua senha agora se parece com isto</label>
+        <div class="encoded-box"><code id="encodedOutput">J#7vM2!qZ9@kL4$</code><button class="copy-button" id="copyButton" type="button" aria-label="Copiar resultado">⧉</button></div>
+        <div class="output-meta"><span><b id="charCount">0</b> caracteres originais</span><span class="secure-label"><span>●</span> processamento local</span></div>
+        <div class="decode-preview"><span class="preview-label">DESCODIFICAÇÃO</span><code id="decodedPreview">Aurora#2026</code><span class="check">✓</span></div>
+      </div>
+    </section>
+
+    <section class="process-section">
+      <div class="section-intro"><div class="eyebrow"><span class="eyebrow-line"></span> por baixo do capô</div><h2>Veja cada movimento.</h2><p>Nada de caixa-preta. Acompanhe como cada caractere vira bytes e depois encontra seu novo símbolo.</p></div>
+      <div class="process-grid">
+        <article class="process-card"><div class="card-top"><span class="card-index">01</span><span class="card-icon">Aa</span></div><h3>Texto original</h3><p>Separamos sua senha em caracteres individuais e lemos cada um no padrão universal UTF-8.</p><div class="token-display" id="originalTokens"><span>A</span><span>u</span><span>r</span><span>o</span><span>r</span><span>a</span></div></article>
+        <div class="process-arrow">↓</div>
+        <article class="process-card"><div class="card-top"><span class="card-index">02</span><span class="card-icon">01</span></div><h3>Conversão numérica</h3><p>Cada caractere recebe um número (byte). Esse número é convertido para dois índices da nossa tabela.</p><div class="token-display numeric" id="numericTokens"><span>65</span><span>117</span><span>114</span><span>111</span></div></article>
+        <div class="process-arrow">↓</div>
+        <article class="process-card accent-card"><div class="card-top"><span class="card-index">03</span><span class="card-icon">✧</span></div><h3>Novo código</h3><p>Os índices apontam para uma mistura de letras, números e símbolos — reversível, sem perder informação.</p><div class="token-display final" id="finalTokens"><span>J#</span><span>7v</span><span>M2</span><span>!q</span></div></article>
+      </div>
+    </section>
+
+    <section class="decode-section">
+      <div class="decode-heading"><div class="eyebrow"><span class="eyebrow-line"></span> caminho de volta</div><h2>Descodificar é o inverso.</h2><p>O mesmo código consegue voltar ao ponto de partida. Cada par é lido, convertido em número e então em caractere.</p></div>
+      <div class="decode-steps"><div><span>01</span><strong>separar pares</strong><small>J# · 7v · M2 · !q</small></div><b>→</b><div><span>02</span><strong>buscar o índice</strong><small>74 · 117 · 77 · 33</small></div><b>→</b><div><span>03</span><strong>recriar o texto</strong><small id="decodeResult">Aurora#2026</small></div></div>
+    </section>
+
+    <section class="disclaimer"><span>ⓘ</span><p><strong>Importante:</strong> esta é uma ferramenta educativa de codificação, não de criptografia. O algoritmo é intencionalmente simples para que você possa acompanhar o passo a passo. Não use o resultado para proteger informações sensíveis.</p></section>
+  </main>
+  <footer><span>CODEXA / 2026</span><span>feito para tornar o complexo claro</span></footer>
+  <script src="script.js"></script>
+</body>
+</html>
